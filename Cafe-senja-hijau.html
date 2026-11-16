@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kafe Senja Hijau - Pemesanan Menu Online</title>
-    <!-- Menggunakan Tailwind CSS untuk styling modern dan responsif -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans & Inter untuk tipografi yang bersih -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons untuk ikon UI yang tajam -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <script>
         tailwind.config = {
             theme: {
@@ -23,11 +19,11 @@
                     },
                     colors: {
                         cafe: {
-                            dark: '#1B4332',     // Forest Green (Utama)
-                            primary: '#2D6A4F',  // Sage/Emerald Green
-                            light: '#D8F3DC',    // Soft Mint Tint
-                            bg: '#F8FAF9',       // Off-white bersih
-                            orange: '#F97316',   // Aksen Orange CTA
+                            dark: '#1B4332',   
+                            primary: '#2D6A4F', 
+                            light: '#D8F3DC',  
+                            bg: '#F8FAF9',       
+                            orange: '#F97316',   
                             orangeHover: '#EA580C'
                         }
                     }
@@ -36,7 +32,6 @@
         }
     </script>
     <style>
-        /* Kustomisasi scrollbar halus */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -52,7 +47,6 @@
             background: #94A3B8;
         }
         
-        /* Animasi halus untuk modal dan kartu */
         @keyframes fadeInScale {
             from {
                 opacity: 0;
@@ -69,11 +63,8 @@
     </style>
 </head>
 <body class="bg-cafe-bg text-slate-800 antialiased min-h-screen flex flex-col">
-
-    <!-- Navbar / Header Utama (Hijau Forest) -->
     <header class="bg-cafe-dark text-white shadow-md sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-            <!-- Brand / Logo Kafe -->
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cafe-orange flex items-center justify-center shadow-inner">
                     <i data-lucide="coffee" class="w-6 h-6 text-white"></i>
@@ -83,15 +74,11 @@
                     <p class="text-xs text-emerald-200 mt-1">Kopi Segar & Roti Hangat Setiap Hari</p>
                 </div>
             </div>
-
-            <!-- Info Meja / Status Buka -->
             <div class="flex items-center gap-3">
                 <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-cafe-primary text-emerald-50 border border-emerald-600/50">
                     <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                     Buka • Meja #04
                 </span>
-                
-                <!-- Tombol Keranjang Mobile (Hanya muncul di layar kecil) -->
                 <button onclick="scrollToCart()" class="lg:hidden relative p-2.5 rounded-xl bg-cafe-primary hover:bg-emerald-700 transition text-white">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span id="mobile-cart-badge" class="hidden absolute -top-1.5 -right-1.5 bg-cafe-orange text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">
@@ -101,14 +88,9 @@
             </div>
         </div>
     </header>
-
-    <!-- Konten Utama: Layout Dua Kolom (Kiri: Menu, Kanan: Keranjang Pesanan) -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <div class="flex flex-col lg:flex-row gap-8 items-start">
-            
-            <!-- BAGIAN KIRI: Daftar Menu Kafe -->
+        <div class="flex flex-col lg:flex-row gap-8 items-start">      
             <section class="w-full lg:w-2/3">
-                <!-- Banner Sambutan Singkat -->
                 <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                         <span class="inline-block px-2.5 py-1 rounded-md bg-cafe-light text-cafe-dark font-semibold text-xs mb-2">
@@ -117,8 +99,6 @@
                         <h2 class="font-display text-xl sm:text-2xl font-bold text-slate-900">Pilih Menu Favorit Anda</h2>
                         <p class="text-sm text-slate-500 mt-1">Klik tombol <span class="text-cafe-orange font-semibold">+ Tambah</span> untuk memasukkan menu ke daftar pesanan di sebelah kanan.</p>
                     </div>
-                    
-                    <!-- Filter Kategori Sederhana -->
                     <div class="flex gap-2 bg-slate-100 p-1 rounded-xl self-start sm:self-center">
                         <button onclick="filterMenu('semua')" id="btn-filter-semua" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold transition bg-cafe-dark text-white shadow-sm">
                             Semua (6)
@@ -131,17 +111,11 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Grid Kartu Menu (Di-render via JavaScript) -->
                 <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                    <!-- Kartu menu akan dimasukkan di sini oleh JS -->
                 </div>
             </section>
-
-            <!-- BAGIAN KANAN: Sidebar Keranjang / Ringkasan Pesanan (Sticky) -->
             <aside id="cart-section" class="w-full lg:w-1/3 lg:sticky lg:top-24">
                 <div class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden flex flex-col">
-                    <!-- Header Keranjang -->
                     <div class="bg-cafe-primary px-5 py-4 text-white flex items-center justify-between">
                         <div class="flex items-center gap-2.5">
                             <i data-lucide="receipt" class="w-5 h-5 text-orange-300"></i>
@@ -151,17 +125,12 @@
                             Kosongkan
                         </button>
                     </div>
-
-                    <!-- Input Nama Pelanggan (Opsional) -->
                     <div class="px-5 pt-4 pb-2 border-b border-slate-100 bg-slate-50/50">
                         <label for="customer-name" class="block text-xs font-semibold text-slate-600 mb-1">Nama Pemesan / Nomor Meja</label>
                         <input type="text" id="customer-name" placeholder="Contoh: Budi - Meja 04" 
                             class="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cafe-primary/30 focus:border-cafe-primary transition">
                     </div>
-
-                    <!-- Daftar Item yang Dibeli Customer -->
                     <div id="cart-items-container" class="p-5 max-h-[360px] overflow-y-auto divide-y divide-slate-100">
-                        <!-- State Kosong Default -->
                         <div id="empty-cart-state" class="py-10 text-center flex flex-col items-center">
                             <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3">
                                 <i data-lucide="shopping-cart" class="w-8 h-8"></i>
@@ -170,8 +139,6 @@
                             <p class="text-xs text-slate-400 mt-1 max-w-[200px]">Silakan pilih minuman atau roti di daftar menu sebelah kiri.</p>
                         </div>
                     </div>
-
-                    <!-- Rincian Total Harga & Tombol Checkout -->
                     <div class="p-5 bg-slate-50 border-t border-slate-200/80 space-y-3">
                         <div class="flex justify-between text-xs text-slate-500">
                             <span>Jumlah Item</span>
@@ -198,17 +165,14 @@
         </div>
     </main>
 
-    <!-- Footer Sederhana -->
     <footer class="bg-white border-t border-slate-200 py-5 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
             &copy; 2026 <span class="font-semibold text-cafe-dark">Kafe Senja Hijau</span>. Terima kasih telah memesan bersama kami.
         </div>
     </footer>
 
-    <!-- Modal Konfirmasi Pesanan / Struk Digital -->
     <div id="receipt-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
         <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl animate-modal">
-            <!-- Header Modal Hijau -->
             <div class="bg-cafe-dark p-6 text-center text-white relative">
                 <div class="w-14 h-14 bg-emerald-500/20 border-2 border-emerald-400 rounded-full flex items-center justify-center mx-auto mb-3">
                     <i data-lucide="check" class="w-8 h-8 text-emerald-300"></i>
@@ -217,7 +181,7 @@
                 <p class="text-xs text-emerald-200 mt-1">Pesanan Anda sedang disiapkan oleh barista kami.</p>
             </div>
 
-            <!-- Isi Struk -->
+           
             <div class="p-6">
                 <div class="flex justify-between text-xs text-slate-500 pb-3 border-b border-slate-100">
                     <div>
@@ -230,15 +194,15 @@
                     </div>
                 </div>
 
-                <!-- Daftar Item di Struk -->
+               
                 <div class="my-4">
                     <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Rincian Pesanan</p>
                     <div id="receipt-items-list" class="space-y-2 max-h-48 overflow-y-auto text-sm">
-                        <!-- Diisi oleh JS -->
+                       
                     </div>
                 </div>
 
-                <!-- Total di Struk -->
+             
                 <div class="bg-orange-50 border border-orange-100 rounded-xl p-3.5 flex items-center justify-between">
                     <span class="font-semibold text-slate-700 text-sm">Total Pembayaran</span>
                     <span id="receipt-total" class="font-display font-extrabold text-lg text-cafe-orange">Rp 0</span>
@@ -251,18 +215,14 @@
         </div>
     </div>
 
-    <!-- Notifikasi Toast Mini (Saat item ditambahkan) -->
+  
     <div id="toast-notification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 hidden items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-full shadow-lg text-xs font-medium transition-all">
         <span class="w-2 h-2 rounded-full bg-cafe-orange"></span>
         <span id="toast-message">Menu ditambahkan</span>
     </div>
 
-    <!-- JavaScript Murni untuk Logika Menu, Keranjang & Kalkulasi Harga -->
     <script>
-        /**
-         * 1. DATA MENU KAFE
-         * Berisi daftar 6 menu sesuai permintaan client lengkap dengan harga dan kategori.
-         */
+
         const cafeMenu = [
             {
                 id: 1,
@@ -326,20 +286,15 @@
             }
         ];
 
-        // State Keranjang Belanja: menyimpan objek { id, name, price, qty }
         let cart = [];
         let currentFilter = 'semua';
 
-        /**
-         * Format angka ke mata uang Rupiah (Contoh: 10000 -> "Rp 10.000")
-         */
+      
+        
         function formatRupiah(angka) {
             return 'Rp ' + angka.toLocaleString('id-ID');
         }
 
-        /**
-         * Render daftar kartu menu ke bagian kiri halaman
-         */
         function renderMenu(filter = 'semua') {
             const menuGrid = document.getElementById('menu-grid');
             menuGrid.innerHTML = '';
@@ -349,7 +304,7 @@
                 : cafeMenu.filter(item => item.category === filter);
 
             filteredItems.forEach(item => {
-                // Cek apakah item sudah ada di keranjang untuk menampilkan indikator jumlah
+           
                 const inCart = cart.find(c => c.id === item.id);
                 const qtyBadge = inCart 
                     ? `<span class="ml-2 px-2 py-0.5 text-[11px] font-bold bg-cafe-light text-cafe-dark rounded-full">${inCart.qty}x di keranjang</span>` 
@@ -380,7 +335,6 @@
                         </p>
                     </div>
 
-                    <!-- Rincian Harga & Tombol Tambah -->
                     <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
                         <div>
                             <span class="block text-[11px] text-slate-400 font-medium">Harga Satuan</span>
@@ -397,17 +351,13 @@
                 menuGrid.appendChild(card);
             });
 
-            // Re-inisialisasi ikon Lucide yang baru ditambahkan ke DOM
             lucide.createIcons();
         }
 
-        /**
-         * Filter tampilan menu berdasarkan kategori
-         */
         function filterMenu(category) {
             currentFilter = category;
             
-            // Update tampilan tombol filter
+          
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('bg-cafe-dark', 'text-white', 'shadow-sm');
                 btn.classList.add('text-slate-600');
@@ -419,9 +369,7 @@
             renderMenu(category);
         }
 
-        /**
-         * Menambahkan item ke keranjang belanja
-         */
+   
         function addToCart(id) {
             const product = cafeMenu.find(item => item.id === id);
             if (!product) return;
@@ -440,19 +388,15 @@
 
             showToast(`${product.name} ditambahkan ke pesanan`);
             updateCartUI();
-            renderMenu(currentFilter); // Perbarui badge jumlah di kartu menu
+            renderMenu(currentFilter);
         }
 
-        /**
-         * Mengubah jumlah item (+1 atau -1) di dalam keranjang
-         */
         function updateQuantity(id, change) {
             const itemIndex = cart.findIndex(item => item.id === id);
             if (itemIndex === -1) return;
 
             cart[itemIndex].qty += change;
 
-            // Jika jumlah menjadi 0 atau kurang, hapus dari keranjang
             if (cart[itemIndex].qty <= 0) {
                 cart.splice(itemIndex, 1);
             }
@@ -461,18 +405,14 @@
             renderMenu(currentFilter);
         }
 
-        /**
-         * Menghapus satu jenis item dari keranjang
-         */
+
         function removeItem(id) {
             cart = cart.filter(item => item.id !== id);
             updateCartUI();
             renderMenu(currentFilter);
         }
 
-        /**
-         * Mengosongkan seluruh isi keranjang
-         */
+       
         function clearCart() {
             cart = [];
             updateCartUI();
@@ -480,9 +420,7 @@
             showToast("Daftar pesanan dikosongkan");
         }
 
-        /**
-         * Memperbarui UI Sidebar Keranjang di sebelah kanan dan kalkulasi Total Harga
-         */
+     
         function updateCartUI() {
             const container = document.getElementById('cart-items-container');
             const emptyState = document.getElementById('empty-cart-state');
@@ -492,15 +430,12 @@
             const clearBtn = document.getElementById('btn-clear-cart');
             const mobileBadge = document.getElementById('mobile-cart-badge');
 
-            // Hitung total kuantitas dan total harga
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            // Update teks ringkasan harga
             totalItemsEl.textContent = `${totalQty} item`;
             totalPriceEl.textContent = formatRupiah(totalPrice);
 
-            // Update badge mobile
             if (totalQty > 0) {
                 mobileBadge.textContent = totalQty;
                 mobileBadge.classList.remove('hidden');
@@ -508,7 +443,7 @@
                 mobileBadge.classList.add('hidden');
             }
 
-            // Jika keranjang kosong
+        
             if (cart.length === 0) {
                 container.innerHTML = '';
                 container.appendChild(emptyState);
@@ -520,12 +455,11 @@
                 return;
             }
 
-            // Jika keranjang memiliki item
             clearBtn.classList.remove('hidden');
             checkoutBtn.disabled = false;
             checkoutBtn.className = "w-full py-3.5 px-4 rounded-xl font-display font-bold text-sm text-white bg-cafe-orange hover:bg-cafe-orangeHover active:scale-[0.99] cursor-pointer transition-all flex items-center justify-center gap-2 shadow-md shadow-orange-500/20";
 
-            // Render daftar item yang dibeli
+       
             container.innerHTML = '';
             cart.forEach(item => {
                 const subtotal = item.price * item.qty;
@@ -559,23 +493,18 @@
             });
         }
 
-        /**
-         * Memproses pesanan dan menampilkan modal struk konfirmasi
-         */
         function processOrder() {
             if (cart.length === 0) return;
 
             const customerInput = document.getElementById('customer-name').value.trim();
             const customerName = customerInput || "Pelanggan Kafe";
             
-            // Waktu saat ini
             const now = new Date();
             const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
 
             document.getElementById('receipt-customer').textContent = customerName;
             document.getElementById('receipt-time').textContent = timeString;
 
-            // Isi rincian item ke dalam modal struk
             const receiptList = document.getElementById('receipt-items-list');
             receiptList.innerHTML = '';
             
@@ -598,30 +527,23 @@
 
             document.getElementById('receipt-total').textContent = formatRupiah(grandTotal);
 
-            // Tampilkan modal
             const modal = document.getElementById('receipt-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
 
-        /**
-         * Menutup modal struk dan mereset pesanan untuk pelanggan berikutnya
-         */
         function closeReceiptModal() {
             const modal = document.getElementById('receipt-modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
 
-            // Reset keranjang & input nama
             cart = [];
             document.getElementById('customer-name').value = '';
             updateCartUI();
             renderMenu(currentFilter);
         }
 
-        /**
-         * Menampilkan notifikasi toast singkat di bagian bawah layar
-         */
+  
         let toastTimeout;
         function showToast(message) {
             const toast = document.getElementById('toast-notification');
@@ -638,14 +560,11 @@
             }, 2000);
         }
 
-        /**
-         * Scroll halus ke bagian keranjang pada tampilan mobile
-         */
+      
         function scrollToCart() {
             document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Inisialisasi tampilan awal saat halaman dimuat
         document.addEventListener('DOMContentLoaded', () => {
             renderMenu('semua');
             updateCartUI();
